@@ -1,17 +1,10 @@
-package io.github.olegvelikanov.services
+package io.github.olegvelikanov.redirect
 
-import io.github.olegvelikanov.Converter
+import io.github.olegvelikanov.converter.Converter
 import io.github.olegvelikanov.domain.CompletedHelpPageParams
 import io.github.olegvelikanov.domain.HelpPageParams
 
-interface RedirectProvider {
-    fun requireRedirect(original: HelpPageParams, completed: CompletedHelpPageParams): String
-}
-
-class RedirectImpl(
-    private val urlConverter: Converter
-) : RedirectProvider {
-
+class RedirectionImpl(private val urlConverter: Converter) : Redirection {
     override fun requireRedirect(original: HelpPageParams, completed: CompletedHelpPageParams): String {
         if (original.pageName != completed.pageName) {
             return urlConverter.generatePath(original.withPageName(completed.pageName))
@@ -19,5 +12,4 @@ class RedirectImpl(
 
         return ""
     }
-
 }

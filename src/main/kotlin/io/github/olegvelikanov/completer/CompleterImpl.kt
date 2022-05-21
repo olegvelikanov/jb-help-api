@@ -1,27 +1,23 @@
-package io.github.olegvelikanov.services
+package io.github.olegvelikanov.completer
 
-import io.github.olegvelikanov.Storage
 import io.github.olegvelikanov.domain.CompletedHelpPageParams
 import io.github.olegvelikanov.domain.HelpPageParams
 
-interface Completer {
-    fun completeParams(original: HelpPageParams): CompletedHelpPageParams
-}
-
 class CompleterImpl(
-    private val storage: Storage
+    private val config: Config
 ) : Completer {
+
     override fun completeParams(original: HelpPageParams): CompletedHelpPageParams {
         val productName = original.productName
 
         var version = original.productVersion
         if (version == "") {
-            version = storage.getCurrentVersion(productName)
+            version = config.getCurrentVersion(productName)
         }
 
         var pageName = original.pageName
         if (pageName == "") {
-            pageName = storage.getDefaultPageName(productName, version)
+            pageName = config.getDefaultPageName(productName, version)
         }
 
         return CompletedHelpPageParams(productName, version, pageName)

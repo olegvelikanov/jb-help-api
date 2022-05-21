@@ -1,5 +1,5 @@
 package io.github.olegvelikanov.domain
 
-data class HelpPage(
-    val htmlContent: String
+class HelpPage(
+    val htmlContent: ByteArray
 )

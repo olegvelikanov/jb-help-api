@@ -4,7 +4,11 @@ val ktorVersion: String by project
 val kodeinVersion: String by project
 val logbackVersion: String by project
 val junitVersion: String by project
-val jetcdVersion: String by project
+val exposedVersion: String by project
+val hikariVersion: String by project
+val postgresVersion: String by project
+val awsSDKVersion: String by project
+val hopliteVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.6.20"
@@ -23,6 +27,15 @@ dependencies {
     implementation("io.ktor:ktor-server-html-builder:$ktorVersion")
     implementation("org.kodein.di:kodein-di-jvm:$kodeinVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+    implementation("com.zaxxer:HikariCP:$hikariVersion")
+    implementation("org.postgresql:postgresql:$postgresVersion")
+    implementation(platform("software.amazon.awssdk:bom:$awsSDKVersion"))
+    implementation("software.amazon.awssdk:s3")
+    implementation("com.sksamuel.hoplite:hoplite-core:$hopliteVersion")
+    implementation("com.sksamuel.hoplite:hoplite-yaml:$hopliteVersion")
 
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
@@ -34,5 +47,5 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
 }

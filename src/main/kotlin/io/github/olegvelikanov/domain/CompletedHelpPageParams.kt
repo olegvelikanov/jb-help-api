@@ -7,7 +7,6 @@ data class CompletedHelpPageParams(
 ) {
     init {
         productName.requireNotBlank("Product name can't be blank")
-        productVersion.requireNotBlank("Product version can't be blank")
         productName.requireNotBlank("Page name can't be blank")
     }
 }

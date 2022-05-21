@@ -1,0 +1,13 @@
+env: local
+
+database:
+  jdbcUrl: 'jdbc:postgresql://localhost:5432/help-api'
+  driverClassName: 'org.postgresql.Driver'
+  username: 'help-api-user'
+  password: '${postgres.user.password}'
+  maximumPoolSize: 10
+
+s3:
+  endpoint: 'http://localhost:9000/'
+  region: 'us-east-1'
+  bucket: 'help'
