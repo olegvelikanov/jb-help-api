@@ -18,8 +18,8 @@ internal class CompleterImplTest {
         every { config.getDefaultPageName("idea", "2022.1") } returns "getting-started.html"
         every { config.getDefaultPageName("idea", "2019.1") } returns "getting-started-2019.html"
 
-        every { config.getCurrentVersion("resharper.sdk") } returns ""
-        every { config.getDefaultPageName("resharper.sdk", "") } returns "welcome.html"
+        every { config.getCurrentVersion("resharper.sdk") } returns "dev"
+        every { config.getDefaultPageName("resharper.sdk", "dev") } returns "welcome.html"
 
         completer = CompleterImpl(config)
     }
@@ -36,7 +36,7 @@ internal class CompleterImplTest {
             },
             {
                 assertEquals(
-                    CompletedHelpPageParams("resharper.sdk", "", "welcome.html"),
+                    CompletedHelpPageParams("resharper.sdk", "dev", "welcome.html"),
                     completer.completeParams(HelpPageParams("resharper.sdk", "", ""))
                 )
             },

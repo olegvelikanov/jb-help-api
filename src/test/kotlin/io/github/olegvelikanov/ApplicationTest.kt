@@ -42,10 +42,10 @@ class ApplicationTest {
                     to CompletedHelpPageParams("idea", "2022.1", "getting-started.html"),
 
             HelpPageParams("resharper.sdk", "", "")
-                    to CompletedHelpPageParams("resharper.sdk", "", "welcome.html"),
+                    to CompletedHelpPageParams("resharper.sdk", "dev", "welcome.html"),
 
             HelpPageParams("resharper.sdk", "", "welcome.html")
-                    to CompletedHelpPageParams("resharper.sdk", "", "welcome.html"),
+                    to CompletedHelpPageParams("resharper.sdk", "dev", "welcome.html"),
 
             HelpPageParams("resharper.sdk", "2022.2", "")
                     to CompletedHelpPageParams("resharper.sdk", "2022.2", "welcome.html"),
@@ -70,8 +70,8 @@ class ApplicationTest {
             storage.getHelpPageFor(eq(CompletedHelpPageParams("idea", "2022.1", "getting-started.html")))
         } returns HelpPage("idea 2022.1 getting-started.html".toByteArray())
         every {
-            storage.getHelpPageFor(eq(CompletedHelpPageParams("resharper.sdk", "", "welcome.html")))
-        } returns HelpPage("resharper.sdk empty version welcome.html".toByteArray())
+            storage.getHelpPageFor(eq(CompletedHelpPageParams("resharper.sdk", "dev", "welcome.html")))
+        } returns HelpPage("resharper.sdk dev welcome.html".toByteArray())
         every {
             storage.getHelpPageFor(eq(CompletedHelpPageParams("resharper.sdk", "2022.2", "welcome.html")))
         } returns HelpPage("resharper.sdk 2022.2 welcome.html".toByteArray())
@@ -121,7 +121,7 @@ class ApplicationTest {
 
         response = client.get("/help/resharper/sdk/welcome.html")
         assertEquals(HttpStatusCode.OK, response.status)
-        assertEquals("resharper.sdk empty version welcome.html", response.bodyAsText())
+        assertEquals("resharper.sdk dev welcome.html", response.bodyAsText())
 
         response = client.get("/help/resharper/sdk/2022.2")
         assertEquals(HttpStatusCode.Found, response.status)

@@ -46,11 +46,11 @@ internal class S3HelpPageStorageImplTest {
         every {
             s3Client.getObject(
                 eq(
-                    GetObjectRequest.builder().bucket("help").key("resharper.sdk/welcome.html").build()
+                    GetObjectRequest.builder().bucket("help").key("resharper.sdk/dev/welcome.html").build()
                 ), ResponseTransformer.toBytes()
             )
         } returns resharperSdkWelcomeRsp
-        every { resharperSdkWelcomeRsp.asByteArray() } returns "resharper.sdk empty version welcome.html".toByteArray()
+        every { resharperSdkWelcomeRsp.asByteArray() } returns "resharper.sdk dev welcome.html".toByteArray()
 
         every {
             s3Client.getObject(
@@ -86,11 +86,11 @@ internal class S3HelpPageStorageImplTest {
             )
         )
         assertEquals(
-            HelpPage("resharper.sdk empty version welcome.html".toByteArray()),
+            HelpPage("resharper.sdk dev welcome.html".toByteArray()),
             storage.getHelpPageFor(
                 CompletedHelpPageParams(
                     "resharper.sdk",
-                    "",
+                    "dev",
                     "welcome.html"
                 )
             )

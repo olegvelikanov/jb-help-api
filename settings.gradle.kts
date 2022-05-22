@@ -1,3 +1,1 @@
-
-rootProject.name = "jetbrains-interview-hw"
-
+rootProject.name = "help-api"
