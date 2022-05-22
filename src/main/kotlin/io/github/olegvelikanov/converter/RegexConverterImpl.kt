@@ -1,8 +1,8 @@
 package io.github.olegvelikanov.converter
 
 import io.github.olegvelikanov.domain.HelpPageParams
-import io.github.olegvelikanov.domain.NoSuchProductException
-import io.github.olegvelikanov.routes.helpRoutePrefix
+import io.github.olegvelikanov.domain.PageNotFoundException
+import io.github.olegvelikanov.helpRoutePrefix
 import java.util.regex.Pattern
 
 
@@ -14,7 +14,7 @@ class RegexConverterImpl : Converter {
     override fun parsePath(url: String): HelpPageParams {
         val matcher = helpPathPattern.matcher(url)
         if (!matcher.matches()) {
-            throw NoSuchProductException("Invalid help path")
+            throw PageNotFoundException("Invalid help path")
         }
 
         val staticPageName = matcher.group(3) ?: ""

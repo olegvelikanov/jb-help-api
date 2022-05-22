@@ -1,6 +1,6 @@
 package io.github.olegvelikanov.completer
 
-import io.github.olegvelikanov.domain.NoSuchProductException
+import io.github.olegvelikanov.domain.PageNotFoundException
 import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.and
@@ -18,7 +18,7 @@ class SequelConfigImpl : Config {
                 .toList()
         }
         if (resultRows.isEmpty()) {
-            throw NoSuchProductException("Can't find current version for $productName")
+            throw PageNotFoundException("Can't find current version for $productName")
         }
         if (resultRows.size != 1) {
             throw SQLException("More than row for primary key $productName")
@@ -35,7 +35,7 @@ class SequelConfigImpl : Config {
                 .toList()
         }
         if (resultRows.isEmpty()) {
-            throw NoSuchProductException("Can't find default page for (name=$productName; version=$productVersion)")
+            throw PageNotFoundException("Can't find default page for (name=$productName; version=$productVersion)")
         }
         if (resultRows.size != 1) {
             throw SQLException("More than row for primary key (name=$productName; version=$productVersion)")

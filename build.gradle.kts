@@ -9,6 +9,8 @@ val hikariVersion: String by project
 val postgresVersion: String by project
 val awsSDKVersion: String by project
 val hopliteVersion: String by project
+val h2Version: String by project
+val mockkVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.6.20"
@@ -40,6 +42,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
     testImplementation(kotlin("test"))
+    testImplementation("com.h2database:h2:$h2Version")
+    testImplementation("io.mockk:mockk:$mockkVersion")
 }
 
 tasks.test {
